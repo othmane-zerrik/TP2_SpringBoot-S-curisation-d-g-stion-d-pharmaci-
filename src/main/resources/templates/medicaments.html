@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médicaments - PharmaSecurity</title>
+</head>
+<body>
+<h1>Liste des médicaments</h1>
+
+<p>
+    <a th:href="@{/home}">Retour à l'accueil</a>
+</p>
+
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Prix</th>
+        <th>Stock</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="medicament : ${medicaments}">
+        <td th:text="${medicament.id}"></td>
+        <td th:text="${medicament.nom}"></td>
+        <td th:text="${medicament.description}"></td>
+        <td th:text="${medicament.prix}"></td>
+        <td th:text="${medicament.stock}"></td>
+    </tr>
+
+    <tr th:if="${#lists.isEmpty(medicaments)}">
+        <td colspan="5">Aucun médicament disponible.</td>
+    </tr>
+    </tbody>
+</table>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Se déconnecter</button>
+</form>
+</body>
+</html>

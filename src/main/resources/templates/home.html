@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - PharmaSecurity</title>
+</head>
+<body>
+<h1>Gestion de pharmacie</h1>
+
+<p>
+    Bienvenue,
+    <strong th:text="${#authentication.name}">Utilisateur</strong> !
+</p>
+
+<p>
+    Votre rôle :
+    <span th:each="authority : ${#authentication.authorities}"
+          th:text="${authority.authority + ' '}"></span>
+</p>
+
+<hr>
+
+<h2>Menu principal</h2>
+
+<ul>
+    <li>
+        <a th:href="@{/medicaments}">Consulter les médicaments</a>
+    </li>
+
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a th:href="@{/admin}">Administration</a>
+    </li>
+
+    <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'',''PHARMACIEN'')')}">
+        <a th:href="@{/medicaments}">Gestion des médicaments</a>
+    </li>
+
+    <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'',''PHARMACIEN'',''CAISSIER'')')}">
+        <a th:href="@{/ventes}">Gestion des ventes</a>
+    </li>
+</ul>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Se déconnecter</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - PharmaSecurity</title>
+</head>
+<body>
+<h1>Espace administrateur</h1>
+
+<p>Bienvenue dans l'espace d'administration de la pharmacie.</p>
+
+<h2>Fonctionnalités</h2>
+
+<ul>
+    <li><a th:href="@{/medicaments}">Consulter les médicaments</a></li>
+    <li><a th:href="@{/admin/utilisateurs}">Gérer les utilisateurs</a></li>
+    <li><a th:href="@{/medicaments/nouveau}">Ajouter un médicament</a></li>
+</ul>
+
+<p>
+    <a th:href="@{/home}">Retour à l'accueil</a>
+</p>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Se déconnecter</button>
+</form>
+</body>
+</html>
